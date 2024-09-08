@@ -7,8 +7,8 @@
 script = ExtResource("1_gk26j")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 480.0
-offset_bottom = 720.0
+offset_right = 10000.0
+offset_bottom = 10000.0
 color = Color(0.301961, 0.423529, 0.247059, 1)
 
 [node name="UI" parent="." instance=ExtResource("2_2esm6")]
