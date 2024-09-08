@@ -1,0 +1,192 @@
+[gd_scene load_steps=12 format=3 uid="uid://cp0t7ugx3sg1c"]
+
+[ext_resource type="Script" path="res://ui.gd" id="1_ctijx"]
+[ext_resource type="PackedScene" uid="uid://w2nufel4t625" path="res://pop_text_generator.tscn" id="2_7jrdd"]
+[ext_resource type="PackedScene" uid="uid://d1ptdrr7t3ywg" path="res://pop_text.tscn" id="3_0vw2x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i2hh4"]
+font_size = 64
+
+[sub_resource type="SystemFont" id="SystemFont_3eybl"]
+font_names = PackedStringArray("WenQuanYi Micro Hei Mono")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pwa46"]
+font_size = 37
+
+[sub_resource type="LabelSettings" id="LabelSettings_u1dmw"]
+font_size = 28
+
+[sub_resource type="InputEventKey" id="InputEventKey_oh0u2"]
+device = -1
+pressed = true
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_ur4ci"]
+events = [SubResource("InputEventKey_oh0u2")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_fwnuw"]
+device = -1
+keycode = 68
+unicode = 100
+
+[sub_resource type="Shortcut" id="Shortcut_njk74"]
+events = [SubResource("InputEventKey_fwnuw")]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ctijx")
+
+[node name="NumDisplay" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.0
+offset_top = 123.0
+offset_right = 56.0
+offset_bottom = 211.0
+grow_horizontal = 2
+text = "2"
+label_settings = SubResource("LabelSettings_i2hh4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartBtn" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.5
+offset_top = 72.0
+offset_right = 134.5
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_3eybl")
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="SetN" type="Node" parent="."]
+
+[node name="TextWhereN" type="Label" parent="SetN"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -211.0
+offset_top = 314.0
+offset_right = 99.0
+offset_bottom = 375.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "where N == "
+label_settings = SubResource("LabelSettings_pwa46")
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="SetN"]
+offset_left = 308.0
+offset_top = 319.0
+offset_right = 402.0
+offset_bottom = 370.0
+theme_override_font_sizes/font_size = 28
+text = "2"
+placeholder_text = "2"
+
+[node name="Texts" type="Node" parent="."]
+
+[node name="Text0" type="Label" parent="Texts"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -218.0
+offset_top = 36.0
+offset_right = 219.0
+offset_bottom = 116.0
+grow_horizontal = 2
+text = "Welcome"
+label_settings = SubResource("LabelSettings_pwa46")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Text1" type="Label" parent="Texts"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -218.0
+offset_top = 223.0
+offset_right = 219.0
+offset_bottom = 286.0
+grow_horizontal = 2
+text = "NyaN-Back! :3"
+label_settings = SubResource("LabelSettings_pwa46")
+horizontal_alignment = 1
+
+[node name="Text2" type="Label" parent="Texts"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -217.5
+offset_top = 283.0
+offset_right = 219.5
+offset_bottom = 346.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_pwa46")
+horizontal_alignment = 1
+
+[node name="TextStats" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
+offset_top = 659.0
+offset_right = 221.0
+offset_bottom = 714.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_u1dmw")
+horizontal_alignment = 1
+
+[node name="ButtonYes" type="Button" parent="."]
+visible = false
+offset_left = 15.0
+offset_top = 353.0
+offset_right = 229.0
+offset_bottom = 651.0
+theme_override_font_sizes/font_size = 32
+disabled = true
+shortcut = SubResource("Shortcut_ur4ci")
+text = "Yes
+(A)"
+
+[node name="ButtonNo" type="Button" parent="."]
+visible = false
+offset_left = 250.0
+offset_top = 353.0
+offset_right = 464.0
+offset_bottom = 651.0
+theme_override_font_sizes/font_size = 32
+disabled = true
+shortcut = SubResource("Shortcut_njk74")
+text = "No
+(D)"
+
+[node name="ButtonGoBack" type="Button" parent="."]
+visible = false
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 112.0
+offset_bottom = 48.0
+text = "Back"
+
+[node name="PopTextGenerator" parent="." instance=ExtResource("2_7jrdd")]
+offset_left = 238.0
+offset_top = 168.0
+offset_right = -179.0
+offset_bottom = -504.0
+pop_text_scene = ExtResource("3_0vw2x")
+text_size = 32
+
+[connection signal="pressed" from="StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="text_changed" from="SetN/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="ButtonYes" to="." method="_on_button_yes_pressed"]
+[connection signal="pressed" from="ButtonNo" to="." method="_on_button_no_pressed"]
+[connection signal="pressed" from="ButtonGoBack" to="." method="_on_button_go_back_pressed"]

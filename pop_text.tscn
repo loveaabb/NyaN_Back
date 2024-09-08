@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1ptdrr7t3ywg"]
+
+[ext_resource type="Script" path="res://pop_text.gd" id="1_gki86"]
+
+[node name="PopText" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_gki86")
