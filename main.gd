@@ -33,6 +33,17 @@ func is_size_reached_n() -> bool:
 	
 func is_numbers_match() -> bool:
 	return (numberQueue.back() == numberQueue.front())
+	
+func randi_skip_num(minn: int, maxn: int, skip: int) -> int:
+	var rawrn = RNG.randi_range(minn, maxn - 1)
+	var res = 0
+	
+	if rawrn >= skip:
+		res = rawrn + 1
+	else:
+		res = rawrn
+		
+	return res
 
 func pregame() -> void:
 	$UI.disp_message("The game starts in", 0)
@@ -49,12 +60,19 @@ func game_start() -> void:
 	$gameCounter.start()
 	
 func next_turn() -> void:
-	var num = RNG.randi_range(0, 9)
+	var num = 0
+	if numberQueue.size() == backN + 1:
+		numberQueue.pop_front()
+		if RNG.randf() > 0.5:
+			num = numberQueue.front()
+		else:
+			num = randi_skip_num(0, 9, numberQueue.front())
+	else:
+		num = RNG.randi_range(0, 9)
+	numberQueue.push_back(num)
+
 	acceptChoice = false
 	$UI.set_choice_buttons_availability(acceptChoice)
-	numberQueue.push_back(num)
-	if numberQueue.size() > backN + 1:
-		numberQueue.pop_front()
 	currentTurn += 1
 	
 func reset_game() -> void:
