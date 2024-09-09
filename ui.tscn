@@ -187,10 +187,8 @@ offset_bottom = 48.0
 text = "Back"
 
 [node name="PopTextGenerator" parent="." instance=ExtResource("2_7jrdd")]
-offset_left = 238.0
-offset_top = 168.0
-offset_right = -179.0
-offset_bottom = -504.0
+offset_right = -417.0
+offset_bottom = -672.0
 pop_text_scene = ExtResource("3_0vw2x")
 text_size = 32
 

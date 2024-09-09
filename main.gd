@@ -1,5 +1,7 @@
 extends Node2D
 
+const MEOW = ["meow!", "nya!", ":3", ";3", "purrr~"]
+
 var numberQueue := []
 var backN := 2
 var turnTime := 3.0
@@ -12,6 +14,7 @@ var chosen := true
 var rightTimes := 0
 var wrongTimes := 0
 var missTimes := 0
+var gameState := "mainmenu"
 
 var RNG = RandomNumberGenerator.new()
 
@@ -55,6 +58,7 @@ func pregame() -> void:
 
 func game_start() -> void:
 	turnState = 0
+	gameState = "inprogress"
 	
 	$gameCounter.wait_time = turnTime / maxState
 	$gameCounter.start()
@@ -89,6 +93,7 @@ func reset_game() -> void:
 	rightTimes = 0
 	wrongTimes = 0
 	missTimes = 0
+	gameState = "mainmenu"
 
 	
 	$UI.set_choice_buttons_visibility(false)
@@ -128,7 +133,7 @@ func _on_game_counter_timeout() -> void:
 			$UI.set_choice_buttons_visibility(true)
 		
 		if not chosen:
-			$UI/PopTextGenerator.emit_text("Miss!", position, Color.RED)
+			$UI/PopTextGenerator.emit_text("Miss!", $UI/NumDisplay.position, Color.RED)
 			missTimes += 1
 			update_stats()
 		
@@ -154,14 +159,24 @@ func _on_game_counter_timeout() -> void:
 func _on_ui_choice(yes: bool) -> void:
 	if acceptChoice:
 		if is_numbers_match() == yes:
-			$UI/PopTextGenerator.emit_text("Correct!", position, Color.GREEN)
+			$UI/PopTextGenerator.emit_text("Correct!", $UI/NumDisplay.position, Color.GREEN)
 			rightTimes += 1
 			update_stats()
 		else:
-			$UI/PopTextGenerator.emit_text("Wrong!", position, Color.RED)
+			$UI/PopTextGenerator.emit_text("Wrong!", $UI/NumDisplay.position, Color.RED)
 			wrongTimes += 1
 			update_stats()
 			
 		acceptChoice = false
 		chosen = true
 		$UI.set_choice_buttons_availability(acceptChoice)
+		
+func _on_color_rect_gui_input(event: InputEvent) -> void:
+	if (event is InputEventMouseButton) \
+		and event.is_pressed() and event.button_index == 1 \
+		or (event is InputEventScreenTouch) \
+		and event.is_pressed():
+			var strtomeow: String = MEOW.pick_random()
+			var randcolor = Color(RNG.randf(), RNG.randf(), RNG.randf(), 1)
+			
+			$UI/PopTextGenerator.emit_text(strtomeow, event.position, randcolor)

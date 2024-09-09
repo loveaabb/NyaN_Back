@@ -17,6 +17,7 @@ color = Color(0.301961, 0.423529, 0.247059, 1)
 
 [node name="gameCounter" type="Timer" parent="."]
 
+[connection signal="gui_input" from="ColorRect" to="." method="_on_color_rect_gui_input"]
 [connection signal="choice" from="UI" to="." method="_on_ui_choice"]
 [connection signal="reset_game" from="UI" to="." method="reset_game"]
 [connection signal="start_game" from="UI" to="." method="pregame"]
